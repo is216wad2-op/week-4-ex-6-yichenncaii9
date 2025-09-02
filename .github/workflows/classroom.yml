@@ -1,0 +1,33 @@
+name: Autograding
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  autograde:
+    name: Selenium Autograding
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Setup Python environment and dependencies
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install webdriver-manager and selenium
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium webdriver-manager
+
+      # Run selenium script (adjust filename if needed)
+      - name: Run autograder script
+        run: |
+          python wk4-ex6-autograder.py
+
