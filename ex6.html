@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
     <h1>Shopping List</h1>
@@ -17,12 +18,39 @@
     <ul id="shopList"></ul>
 
     <script>
-        
+
         // add code here
-    
+
+        var selectedItem = document.getElementById("select_item");
+        var ul = document.getElementById("shopList");
+
+        selectedItem.addEventListener("change", addNewItem);
+
+        function addNewItem() {
+            var selectedValue = selectedItem.value;
+
+            // check if already exists in list
+            var items = ul.getElementsByTagName("li");
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].textContent === selectedValue) {
+                    return; // already present, don’t add
+                }
+            }
+
+            // create new <li>
+            var li = document.createElement("li");
+            var textNode = document.createTextNode(selectedValue);
+
+            li.appendChild(textNode);
+            ul.appendChild(li);
+
+
+        }
+
     </script>
 
-    
 
-    </body>
+
+</body>
+
 </html>
